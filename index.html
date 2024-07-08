@@ -3,52 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Discord Clone</title>
+    <title>Welcome to Discord Clone</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="login-container" id="login-container">
-        <div class="login-form" id="login-form">
-            <h2>Login</h2>
-            <input type="text" id="login-username" placeholder="Username" required>
-            <input type="password" id="login-password" placeholder="Password" required>
-            <button id="login-button">Login</button>
-            <p>Don't have an account? <span id="show-register">Register here</span></p>
-        </div>
-        <div class="register-form" id="register-form" style="display: none;">
-            <h2>Register</h2>
-            <input type="text" id="register-username" placeholder="Username" required>
-            <input type="password" id="register-password" placeholder="Password" required>
-            <button id="register-button">Register</button>
-            <p>Already have an account? <span id="show-login">Login here</span></p>
-        </div>
+    <div class="landing-container">
+        <h1>Welcome to Discord Clone</h1>
+        <a href="login.html" class="button">Login</a>
+        <a href="register.html" class="button">Register</a>
     </div>
-    <div class="main-container" id="main-container" style="display: none;">
-        <div class="sidebar">
-            <div class="server-list">
-                <div class="server">S1</div>
-                <div class="server">S2</div>
-                <div class="server">S3</div>
-            </div>
-            <div class="channel-list">
-                <div class="channel"># general</div>
-                <div class="channel"># random</div>
-            </div>
-        </div>
-        <div class="chat">
-            <div class="chat-header">
-                <h1># general</h1>
-                <div class="user-info" id="user-info"></div>
-            </div>
-            <div class="chat-messages" id="chat-messages">
-                <!-- Messages will appear here -->
-            </div>
-            <div class="chat-input">
-                <input type="text" id="message-input" placeholder="Type a message...">
-                <button id="send-button">Send</button>
-            </div>
-        </div>
-    </div>
-    <script src="script.js"></script>
 </body>
 </html>
