@@ -1,1 +1,35 @@
-HIIII
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discord Clone</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="sidebar">
+        <div class="server-list">
+            <div class="server">S1</div>
+            <div class="server">S2</div>
+            <div class="server">S3</div>
+        </div>
+        <div class="channel-list">
+            <div class="channel"># general</div>
+            <div class="channel"># random</div>
+        </div>
+    </div>
+    <div class="chat">
+        <div class="chat-header">
+            <h1># general</h1>
+        </div>
+        <div class="chat-messages" id="chat-messages">
+            <!-- Messages will appear here -->
+        </div>
+        <div class="chat-input">
+            <input type="text" id="message-input" placeholder="Type a message...">
+            <button id="send-button">Send</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
