@@ -1,68 +1,73 @@
-// Handle login
-document.getElementById('login-button')?.addEventListener('click', loginUser);
-document.getElementById('register-button')?.addEventListener('click', registerUser);
+document.getElementById('login-form')?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const username = document.getElementById('login-username').value;
+    const password = document.getElementById('login-password').value;
 
-// Handle page navigation
-document.getElementById('show-register')?.addEventListener('click', () => {
-    window.location.href = 'register.html';
-});
-document.getElementById('show-login')?.addEventListener('click', () => {
-    window.location.href = 'login.html';
-});
+    try {
+        const response = await fetch('/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username, password })
+        });
 
-// Handle message sending
-document.getElementById('send-button')?.addEventListener('click', sendMessage);
-document.getElementById('message-input')?.addEventListener('keypress', function (e) {
-    if (e.key === 'Enter') {
-        sendMessage();
+        if (response.ok) {
+            const { token } = await response.json();
+            localStorage.setItem('token', token);
+            window.location.href = 'chat.html';
+        } else {
+            alert('Login failed');
+        }
+    } catch (error) {
+        console.error('Error:', error);
     }
 });
 
-function registerUser() {
-    const username = document.getElementById('register-username').value.trim();
-    const password = document.getElementById('register-password').value.trim();
+document.getElementById('register-form')?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const username = document.getElementById('register-username').value;
+    const password = document.getElementById('register-password').value;
 
-    if (username && password) {
-        localStorage.setItem(username, password);
-        alert('Registration successful!');
-        window.location.href = 'login.html';
-    } else {
-        alert('Please fill in both fields.');
+    try {
+        const response = await fetch('/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username, password })
+        });
+
+        if (response.ok) {
+            alert('Registration successful');
+            window.location.href = 'login.html';
+        } else {
+            alert('Registration failed');
+        }
+    } catch (error) {
+        console.error('Error:', error);
     }
-}
+});
 
-function loginUser() {
-    const username = document.getElementById('login-username').value.trim();
-    const password = document.getElementById('login-password').value.trim();
-
-    if (localStorage.getItem(username) === password) {
-        localStorage.setItem('loggedInUser', username);
-        window.location.href = 'chat.html';
-    } else {
-        alert('Invalid username or password.');
-    }
-}
-
-function sendMessage() {
-    const messageInput = document.getElementById('message-input');
-    const messageText = messageInput.value.trim();
-    const username = localStorage.getItem('loggedInUser');
-
-    if (messageText !== '') {
-        const messageElement = document.createElement('div');
-        messageElement.textContent = `${username}: ${messageText}`;
-        messageElement.className = 'message';
-        document.getElementById('chat-messages').appendChild(messageElement);
-        messageInput.value = '';
-        messageInput.focus();
-    }
-}
-
-// Display user info on chat page
 if (document.getElementById('user-info')) {
-    const loggedInUser = localStorage.getItem('loggedInUser');
-    if (loggedInUser) {
-        document.getElementById('user-info').textContent = `Logged in as ${loggedInUser}`;
+    const token = localStorage.getItem('token');
+    if (token) {
+        try {
+            const response = await fetch('/me', {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            if (response.ok) {
+                const user = await response.json();
+                document.getElementById('user-info').textContent = `Logged in as ${user.username}`;
+            } else {
+                window.location.href = 'login.html';
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
     } else {
         window.location.href = 'login.html';
     }
