@@ -3,7 +3,7 @@ body {
     font-family: Arial, sans-serif;
 }
 
-.landing-container, .login-container, .register-container, .main-container {
+.landing-container, .form-container, .main-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -33,24 +33,30 @@ body {
     background-color: #5b6eae;
 }
 
+.form-container {
+    width: 100%;
+}
+
 .login-form, .register-form {
     background-color: #2f3136;
     color: white;
     padding: 20px;
     border-radius: 5px;
+    width: 300px;
     text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
-.login-form input, .register-form input {
+form input {
     display: block;
-    width: 80%;
-    margin: 10px auto;
+    width: 100%;
+    margin: 10px 0;
     padding: 10px;
     border-radius: 5px;
     border: none;
 }
 
-.login-form button, .register-form button {
+form button {
     padding: 10px 20px;
     border: none;
     background-color: #7289da;
@@ -59,16 +65,20 @@ body {
     cursor: pointer;
 }
 
-.login-form p, .register-form p {
+form button:hover {
+    background-color: #5b6eae;
+}
+
+form p {
     margin-top: 10px;
 }
 
-.login-form a, .register-form a {
+form a {
     color: #7289da;
     text-decoration: none;
 }
 
-.login-form a:hover, .register-form a:hover {
+form a:hover {
     text-decoration: underline;
 }
 
