@@ -1,24 +1,22 @@
-document.getElementById('login-button').addEventListener('click', loginUser);
-document.getElementById('register-button').addEventListener('click', registerUser);
-document.getElementById('show-register').addEventListener('click', showRegisterForm);
-document.getElementById('show-login').addEventListener('click', showLoginForm);
+// Handle login
+document.getElementById('login-button')?.addEventListener('click', loginUser);
+document.getElementById('register-button')?.addEventListener('click', registerUser);
 
-document.getElementById('send-button').addEventListener('click', sendMessage);
-document.getElementById('message-input').addEventListener('keypress', function (e) {
+// Handle page navigation
+document.getElementById('show-register')?.addEventListener('click', () => {
+    window.location.href = 'register.html';
+});
+document.getElementById('show-login')?.addEventListener('click', () => {
+    window.location.href = 'login.html';
+});
+
+// Handle message sending
+document.getElementById('send-button')?.addEventListener('click', sendMessage);
+document.getElementById('message-input')?.addEventListener('keypress', function (e) {
     if (e.key === 'Enter') {
         sendMessage();
     }
 });
-
-function showLoginForm() {
-    document.getElementById('register-form').style.display = 'none';
-    document.getElementById('login-form').style.display = 'block';
-}
-
-function showRegisterForm() {
-    document.getElementById('login-form').style.display = 'none';
-    document.getElementById('register-form').style.display = 'block';
-}
 
 function registerUser() {
     const username = document.getElementById('register-username').value.trim();
@@ -27,7 +25,7 @@ function registerUser() {
     if (username && password) {
         localStorage.setItem(username, password);
         alert('Registration successful!');
-        showLoginForm();
+        window.location.href = 'login.html';
     } else {
         alert('Please fill in both fields.');
     }
@@ -38,11 +36,8 @@ function loginUser() {
     const password = document.getElementById('login-password').value.trim();
 
     if (localStorage.getItem(username) === password) {
-        alert('Login successful!');
         localStorage.setItem('loggedInUser', username);
-        document.getElementById('login-container').style.display = 'none';
-        document.getElementById('main-container').style.display = 'flex';
-        document.getElementById('user-info').textContent = `Logged in as ${username}`;
+        window.location.href = 'chat.html';
     } else {
         alert('Invalid username or password.');
     }
@@ -60,5 +55,15 @@ function sendMessage() {
         document.getElementById('chat-messages').appendChild(messageElement);
         messageInput.value = '';
         messageInput.focus();
+    }
+}
+
+// Display user info on chat page
+if (document.getElementById('user-info')) {
+    const loggedInUser = localStorage.getItem('loggedInUser');
+    if (loggedInUser) {
+        document.getElementById('user-info').textContent = `Logged in as ${loggedInUser}`;
+    } else {
+        window.location.href = 'login.html';
     }
 }
