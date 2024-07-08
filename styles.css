@@ -1,8 +1,50 @@
 body {
-    display: flex;
-    height: 100vh;
     margin: 0;
     font-family: Arial, sans-serif;
+    display: flex;
+    height: 100vh;
+}
+
+.login-container, .main-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-form, .register-form {
+    background-color: #2f3136;
+    color: white;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.login-form input, .register-form input {
+    display: block;
+    width: 80%;
+    margin: 10px auto;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+}
+
+.login-form button, .register-form button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #7289da;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.login-form p, .register-form p {
+    margin-top: 10px;
+}
+
+.login-form span, .register-form span {
+    color: #7289da;
+    cursor: pointer;
 }
 
 .sidebar {
@@ -57,6 +99,14 @@ body {
     background-color: #36393f;
     padding: 20px;
     color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
 }
 
 .chat-messages {
