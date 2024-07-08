@@ -41,14 +41,29 @@ if (document.getElementById('user-info')) {
     }
 }
 
+document.addEventListener('DOMContentLoaded', function() {
+    const messages = JSON.parse(localStorage.getItem('messages')) || [];
+    const messagesContainer = document.getElementById('chat-messages');
+    messages.forEach(message => {
+        const newMessage = document.createElement('div');
+        newMessage.textContent = message;
+        messagesContainer.appendChild(newMessage);
+    });
+});
+
 document.getElementById('send-button')?.addEventListener('click', function() {
     const messageInput = document.getElementById('message-input');
     const message = messageInput.value;
     if (message) {
-        const messages = document.getElementById('chat-messages');
+        const messages = JSON.parse(localStorage.getItem('messages')) || [];
+        messages.push(message);
+        localStorage.setItem('messages', JSON.stringify(messages));
+
+        const messagesContainer = document.getElementById('chat-messages');
         const newMessage = document.createElement('div');
         newMessage.textContent = message;
-        messages.appendChild(newMessage);
+        messagesContainer.appendChild(newMessage);
+
         messageInput.value = '';
     }
 });
