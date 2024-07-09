@@ -3,25 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat - Bettercord</title>
+    <title>Chat - Discord Clone</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="main-container">
         <div class="sidebar">
-            <div class="server-list">
-                <div class="server">S1</div>
-                <div class="server">S2</div>
-                <div class="server">S3</div>
+            <div class="server-list" id="server-list">
+                <!-- Server buttons will be dynamically added here -->
             </div>
-            <div class="channel-list">
-                <div class="channel"># general</div>
-                <div class="channel"># random</div>
+            <div class="channel-list" id="channel-list">
+                <!-- Channel buttons will be dynamically added here -->
             </div>
         </div>
         <div class="chat">
             <div class="chat-header">
-                <h1># general</h1>
+                <h1 id="channel-name">Select a Channel</h1>
                 <div class="user-info" id="user-info"></div>
             </div>
             <div class="chat-messages" id="chat-messages">
