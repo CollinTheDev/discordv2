@@ -159,6 +159,15 @@ form a:hover {
     padding: 10px;
     background-color: #f3f3f3;
     overflow-y: auto;
+    color: #333; /* Ensures text is visible */
+}
+
+.chat-messages div {
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    color: #333; /* Ensures text is visible */
 }
 
 .chat-input {
