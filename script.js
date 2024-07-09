@@ -1,69 +1,62 @@
-document.getElementById('login-form')?.addEventListener('submit', function(e) {
-    e.preventDefault();
-    const username = document.getElementById('login-username').value;
-    const password = document.getElementById('login-password').value;
+document.addEventListener('DOMContentLoaded', () => {
+    const servers = {
+        "Server 1": ["# general", "# random"],
+        "Server 2": ["# announcements", "# updates"],
+        "Server 3": ["# lounge", "# gaming"]
+    };
 
-    const users = JSON.parse(localStorage.getItem('users')) || [];
-    const user = users.find(u => u.username === username && u.password === password);
-
-    if (user) {
-        localStorage.setItem('currentUser', JSON.stringify(user));
-        window.location.href = 'chat.html';
-    } else {
-        alert('Invalid username or password');
+    const serverList = document.getElementById('server-list');
+    const channelList = document.getElementById('channel-list');
+    const channelName = document.getElementById('channel-name');
+    const chatMessages = document.getElementById('chat-messages');
+    
+    // Dynamically create server buttons
+    for (const [serverName, channels] of Object.entries(servers)) {
+        const serverButton = document.createElement('div');
+        serverButton.className = 'server';
+        serverButton.textContent = serverName;
+        serverButton.onclick = () => showChannels(serverName, channels);
+        serverList.appendChild(serverButton);
     }
-});
 
-document.getElementById('register-form')?.addEventListener('submit', function(e) {
-    e.preventDefault();
-    const username = document.getElementById('register-username').value;
-    const password = document.getElementById('register-password').value;
+    function showChannels(serverName, channels) {
+        // Clear previous channels
+        channelList.innerHTML = '';
+        channelName.textContent = `Select a Channel`;
 
-    const users = JSON.parse(localStorage.getItem('users')) || [];
-    const userExists = users.some(u => u.username === username);
+        // Show the channel list for the selected server
+        channelList.style.display = 'block';
 
-    if (userExists) {
-        alert('Username already exists');
-    } else {
-        users.push({ username, password });
-        localStorage.setItem('users', JSON.stringify(users));
-        alert('Registration successful');
-        window.location.href = 'login.html';
+        // Dynamically create channel buttons
+        channels.forEach(channel => {
+            const channelButton = document.createElement('div');
+            channelButton.className = 'channel';
+            channelButton.textContent = channel;
+            channelButton.onclick = () => loadMessages(channel);
+            channelList.appendChild(channelButton);
+        });
     }
-});
 
-if (document.getElementById('user-info')) {
-    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    if (currentUser) {
-        document.getElementById('user-info').textContent = `Logged in as ${currentUser.username}`;
-    } else {
-        window.location.href = 'login.html';
+    function loadMessages(channel) {
+        // Clear previous messages
+        chatMessages.innerHTML = '';
+        channelName.textContent = channel;
+
+        // For demo purposes, we use static messages
+        const messages = [
+            "Hello there!",
+            "Welcome to the channel.",
+            "Feel free to chat!"
+        ];
+
+        // Display messages
+        messages.forEach(message => {
+            const messageDiv = document.createElement('div');
+            messageDiv.textContent = message;
+            chatMessages.appendChild(messageDiv);
+        });
     }
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-    const messages = JSON.parse(localStorage.getItem('messages')) || [];
-    const messagesContainer = document.getElementById('chat-messages');
-    messages.forEach(message => {
-        const newMessage = document.createElement('div');
-        newMessage.textContent = message;
-        messagesContainer.appendChild(newMessage);
-    });
-});
-
-document.getElementById('send-button')?.addEventListener('click', function() {
-    const messageInput = document.getElementById('message-input');
-    const message = messageInput.value;
-    if (message) {
-        const messages = JSON.parse(localStorage.getItem('messages')) || [];
-        messages.push(message);
-        localStorage.setItem('messages', JSON.stringify(messages));
-
-        const messagesContainer = document.getElementById('chat-messages');
-        const newMessage = document.createElement('div');
-        newMessage.textContent = message;
-        messagesContainer.appendChild(newMessage);
-
-        messageInput.value = '';
-    }
+    
+    // Dummy user info for demonstration
+    document.getElementById('user-info').textContent = "User: ExampleUser";
 });
