@@ -11,6 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const chatMessages = document.getElementById('chat-messages');
     const messageInput = document.getElementById('message-input');
     const sendButton = document.getElementById('send-button');
+    
+    let currentChannel = ''; // Track the current channel
 
     function displayServers() {
         for (const [serverName, channels] of Object.entries(servers)) {
@@ -37,29 +39,34 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function loadMessages(channel) {
+        currentChannel = channel; // Update current channel
         chatMessages.innerHTML = ''; // Clear previous messages
         channelName.textContent = channel;
 
-        // For demo purposes, simulate loading messages
-        const messages = [
-            "Hello there!",
-            "Welcome to the channel.",
-            "Feel free to chat!"
-        ];
-
-        messages.forEach(message => {
+        // Load messages from localStorage
+        const storedMessages = JSON.parse(localStorage.getItem(channel)) || [];
+        storedMessages.forEach(message => {
             const messageDiv = document.createElement('div');
             messageDiv.textContent = message;
             chatMessages.appendChild(messageDiv);
         });
+
+        chatMessages.scrollTop = chatMessages.scrollHeight; // Scroll to the bottom
     }
 
     function sendMessage() {
         const message = messageInput.value.trim();
-        if (message) {
+        if (message && currentChannel) {
+            // Append message to chat
             const messageDiv = document.createElement('div');
             messageDiv.textContent = message;
             chatMessages.appendChild(messageDiv);
+
+            // Save message to localStorage
+            const storedMessages = JSON.parse(localStorage.getItem(currentChannel)) || [];
+            storedMessages.push(message);
+            localStorage.setItem(currentChannel, JSON.stringify(storedMessages));
+
             messageInput.value = ''; // Clear input field
             chatMessages.scrollTop = chatMessages.scrollHeight; // Scroll to the bottom
         }
