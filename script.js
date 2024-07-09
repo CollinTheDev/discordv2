@@ -1,7 +1,3 @@
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js";
-import { getFirestore, collection, addDoc, onSnapshot, query, where, orderBy } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
-
 // Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyAOK2H7XklP-_ng407mj___hy3Fy9InNtk",
@@ -13,8 +9,8 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
 
 document.addEventListener('DOMContentLoaded', () => {
     const serverList = document.getElementById('server-list');
@@ -51,10 +47,10 @@ document.addEventListener('DOMContentLoaded', () => {
         channelName.textContent = `Channels for Server ${serverId}`;
         chatMessages.innerHTML = ''; // Clear previous messages
 
-        const messagesRef = collection(db, 'messages');
-        const q = query(messagesRef, where('serverId', '==', serverId), orderBy('timestamp'));
+        const messagesRef = db.collection('messages');
+        const q = messagesRef.where('serverId', '==', serverId).orderBy('timestamp');
 
-        onSnapshot(q, (querySnapshot) => {
+        q.onSnapshot((querySnapshot) => {
             chatMessages.innerHTML = '';
             querySnapshot.forEach((doc) => {
                 const message = doc.data();
@@ -70,10 +66,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const message = messageInput.value.trim();
         if (message && currentServerId) {
             try {
-                await addDoc(collection(db, 'messages'), {
+                await db.collection('messages').add({
                     serverId: currentServerId,
                     text: message,
-                    timestamp: new Date()
+                    timestamp: firebase.firestore.FieldValue.serverTimestamp()
                 });
                 messageInput.value = ''; // Clear input field
             } catch (e) {
