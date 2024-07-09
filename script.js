@@ -9,6 +9,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const channelList = document.getElementById('channel-list');
     const channelName = document.getElementById('channel-name');
     const chatMessages = document.getElementById('chat-messages');
+    const messageInput = document.getElementById('message-input');
+    const sendButton = document.getElementById('send-button');
 
     function displayServers() {
         for (const [serverName, channels] of Object.entries(servers)) {
@@ -38,6 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
         chatMessages.innerHTML = ''; // Clear previous messages
         channelName.textContent = channel;
 
+        // For demo purposes, simulate loading messages
         const messages = [
             "Hello there!",
             "Welcome to the channel.",
@@ -50,6 +53,28 @@ document.addEventListener('DOMContentLoaded', () => {
             chatMessages.appendChild(messageDiv);
         });
     }
+
+    function sendMessage() {
+        const message = messageInput.value.trim();
+        if (message) {
+            const messageDiv = document.createElement('div');
+            messageDiv.textContent = message;
+            chatMessages.appendChild(messageDiv);
+            messageInput.value = ''; // Clear input field
+            chatMessages.scrollTop = chatMessages.scrollHeight; // Scroll to the bottom
+        }
+    }
+
+    // Add event listener to the send button
+    sendButton.addEventListener('click', sendMessage);
+
+    // Optionally, add event listener for Enter key
+    messageInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault(); // Prevent form submission if inside a form
+            sendMessage();
+        }
+    });
 
     // Initialize server list on page load
     displayServers();
