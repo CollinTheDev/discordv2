@@ -1,85 +1,103 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const servers = {
-        "Server 1": ["# general", "# random"],
-        "Server 2": ["# announcements", "# updates"],
-        "Server 3": ["# lounge", "# gaming"]
-    };
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js";
+import { getFirestore, collection, addDoc, onSnapshot, query, where, orderBy } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
 
+// Your web app's Firebase configuration
+const firebaseConfig = {
+    apiKey: "YOUR_API_KEY",
+    authDomain: "YOUR_AUTH_DOMAIN",
+    projectId: "YOUR_PROJECT_ID",
+    storageBucket: "YOUR_STORAGE_BUCKET",
+    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+    appId: "YOUR_APP_ID"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+document.addEventListener('DOMContentLoaded', () => {
     const serverList = document.getElementById('server-list');
     const channelList = document.getElementById('channel-list');
     const channelName = document.getElementById('channel-name');
     const chatMessages = document.getElementById('chat-messages');
     const messageInput = document.getElementById('message-input');
     const sendButton = document.getElementById('send-button');
-    
-    let currentChannel = ''; // Track the current channel
+    const joinServerButton = document.getElementById('join-server-button');
+    const serverIdInput = document.getElementById('server-id-input');
+
+    let currentServerId = ''; // Track the current server ID
 
     function displayServers() {
-        for (const [serverName, channels] of Object.entries(servers)) {
+        // Dummy servers data
+        const servers = {
+            "Server 1": "server1",
+            "Server 2": "server2",
+            "Server 3": "server3"
+        };
+
+        for (const [serverName, serverId] of Object.entries(servers)) {
             const serverButton = document.createElement('div');
             serverButton.className = 'server';
             serverButton.textContent = serverName;
-            serverButton.onclick = () => showChannels(serverName, channels);
+            serverButton.onclick = () => joinServer(serverId);
             serverList.appendChild(serverButton);
         }
     }
 
-    function showChannels(serverName, channels) {
+    async function joinServer(serverId) {
+        currentServerId = serverId;
         channelList.innerHTML = ''; // Clear previous channels
-        channelName.textContent = `Channels for ${serverName}`;
-        channelList.style.display = 'block'; // Show the channel list
-
-        channels.forEach(channel => {
-            const channelButton = document.createElement('div');
-            channelButton.className = 'channel';
-            channelButton.textContent = channel;
-            channelButton.onclick = () => loadMessages(channel);
-            channelList.appendChild(channelButton);
-        });
-    }
-
-    function loadMessages(channel) {
-        currentChannel = channel; // Update current channel
+        channelName.textContent = `Channels for Server ${serverId}`;
         chatMessages.innerHTML = ''; // Clear previous messages
-        channelName.textContent = channel;
 
-        // Load messages from localStorage
-        const storedMessages = JSON.parse(localStorage.getItem(channel)) || [];
-        storedMessages.forEach(message => {
-            const messageDiv = document.createElement('div');
-            messageDiv.textContent = message;
-            chatMessages.appendChild(messageDiv);
+        const messagesRef = collection(db, 'messages');
+        const q = query(messagesRef, where('serverId', '==', serverId), orderBy('timestamp'));
+
+        onSnapshot(q, (querySnapshot) => {
+            chatMessages.innerHTML = '';
+            querySnapshot.forEach((doc) => {
+                const message = doc.data();
+                const messageDiv = document.createElement('div');
+                messageDiv.textContent = message.text;
+                chatMessages.appendChild(messageDiv);
+            });
+            chatMessages.scrollTop = chatMessages.scrollHeight; // Scroll to the bottom
         });
-
-        chatMessages.scrollTop = chatMessages.scrollHeight; // Scroll to the bottom
     }
 
-    function sendMessage() {
+    async function sendMessage() {
         const message = messageInput.value.trim();
-        if (message && currentChannel) {
-            // Append message to chat
-            const messageDiv = document.createElement('div');
-            messageDiv.textContent = message;
-            chatMessages.appendChild(messageDiv);
-
-            // Save message to localStorage
-            const storedMessages = JSON.parse(localStorage.getItem(currentChannel)) || [];
-            storedMessages.push(message);
-            localStorage.setItem(currentChannel, JSON.stringify(storedMessages));
-
-            messageInput.value = ''; // Clear input field
-            chatMessages.scrollTop = chatMessages.scrollHeight; // Scroll to the bottom
+        if (message && currentServerId) {
+            try {
+                await addDoc(collection(db, 'messages'), {
+                    serverId: currentServerId,
+                    text: message,
+                    timestamp: new Date()
+                });
+                messageInput.value = ''; // Clear input field
+            } catch (e) {
+                console.error('Error adding document: ', e);
+            }
         }
     }
 
     // Add event listener to the send button
     sendButton.addEventListener('click', sendMessage);
 
-    // Optionally, add event listener for Enter key
+    // Add event listener for Enter key
     messageInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') {
             e.preventDefault(); // Prevent form submission if inside a form
             sendMessage();
+        }
+    });
+
+    // Add event listener to join server button
+    joinServerButton.addEventListener('click', () => {
+        const serverId = serverIdInput.value.trim();
+        if (serverId) {
+            joinServer(serverId);
         }
     });
 
