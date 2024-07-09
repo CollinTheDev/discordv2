@@ -14,6 +14,10 @@ body {
     height: 100vh;
 }
 
+.auth-container {
+    justify-content: center;
+}
+
 .auth-container h1, .auth-container button {
     margin: 10px;
 }
@@ -30,6 +34,8 @@ button {
     background-color: #7289da;
     border: none;
     color: #fff;
+    border-radius: 5px;
+    font-size: 16px;
 }
 
 button:hover {
@@ -38,16 +44,35 @@ button:hover {
 
 .main-container {
     display: flex;
+    height: 100vh;
 }
 
 .sidebar {
     width: 200px;
     background-color: #23272a;
     padding: 10px;
+    display: flex;
+    flex-direction: column;
 }
 
 .server-list, .channel-list {
     margin-bottom: 20px;
+}
+
+.channel-list ul, .server-list ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.channel-list li, .server-list li {
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 5px 0;
+}
+
+.channel-list li:hover, .server-list li:hover {
+    background-color: #3c3f43;
 }
 
 .chat {
@@ -59,6 +84,7 @@ button:hover {
 .chat-header {
     padding: 10px;
     background-color: #2c2f33;
+    border-bottom: 1px solid #99aab5;
 }
 
 .chat-messages {
@@ -72,6 +98,7 @@ button:hover {
     display: flex;
     padding: 10px;
     background-color: #2c2f33;
+    border-top: 1px solid #99aab5;
 }
 
 .chat-input input {
@@ -80,4 +107,24 @@ button:hover {
     margin-right: 10px;
     border: none;
     border-radius: 5px;
+}
+
+.chat-input button {
+    padding: 10px;
+    cursor: pointer;
+    background-color: #7289da;
+    border: none;
+    color: #fff;
+    border-radius: 5px;
+}
+
+.chat-input button:hover {
+    background-color: #99aab5;
+}
+
+.user-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
 }
