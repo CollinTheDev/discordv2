@@ -3,32 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat - Discord Clone</title>
+    <title>Chat</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js"></script>
 </head>
 <body>
     <div class="main-container">
         <div class="sidebar">
             <div class="server-list" id="server-list">
-                <!-- Server buttons will be dynamically added here -->
+                <h2>Servers</h2>
+                <ul>
+                    <li onclick="selectServer('Server1')">Server 1</li>
+                    <li onclick="selectServer('Server2')">Server 2</li>
+                </ul>
             </div>
             <div class="channel-list" id="channel-list">
-                <!-- Channel buttons will be dynamically added here -->
+                <h2>Channels</h2>
+                <ul id="channels">
+                    <!-- Channels will be populated here -->
+                </ul>
             </div>
         </div>
         <div class="chat">
             <div class="chat-header">
                 <h1 id="channel-name">Select a Channel</h1>
-                <div class="user-info" id="user-info"></div>
+                <div class="user-info" id="user-info">User: ExampleUser</div>
             </div>
-            <div class="chat-messages" id="chat-messages">
-                <!-- Messages will appear here -->
-            </div>
+            <div class="chat-messages" id="chat-messages"></div>
             <div class="chat-input">
                 <input type="text" id="message-input" placeholder="Type a message...">
-                <button id="send-button">Send</button>
+                <button id="send-button" onclick="sendMessage()">Send</button>
             </div>
         </div>
     </div>
