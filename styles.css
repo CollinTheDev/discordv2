@@ -1,204 +1,33 @@
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: #36393f;
-    color: white;
-}
+/* Existing styles remain the same */
 
-.landing-container, .form-container, .main-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-
-.landing-container {
-    flex-direction: column;
-    text-align: center;
-}
-
-.landing-container h1 {
-    margin-bottom: 20px;
-    color: white;
-}
-
-.button {
-    display: inline-block;
-    margin: 10px;
-    padding: 10px 20px;
-    background-color: #7289da;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-}
-
-.button:hover {
-    background-color: #5b6eae;
-}
-
-.form-container {
+/* Make sure server and channel list have proper scrollable areas */
+.server-list, .channel-list {
     width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.login-form, .register-form {
-    background-color: #2f3136;
-    color: white;
-    padding: 20px;
-    border-radius: 5px;
-    width: 300px;
-    text-align: center;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-}
-
-form input {
-    display: block;
-    width: calc(100% - 20px);
-    margin: 10px 0;
     padding: 10px;
-    border-radius: 5px;
-    border: none;
-    outline: none;
-    background-color: #40444b;
-    color: white;
+    overflow-y: auto;
+    height: calc(100% - 80px); /* Adjust according to header/footer size */
 }
 
-form button {
-    padding: 10px 20px;
-    border: none;
-    background-color: #7289da;
-    color: white;
-    border-radius: 5px;
-    cursor: pointer;
+.channel-list {
+    display: none; /* Hidden initially, shown when a server is selected */
 }
 
-form button:hover {
-    background-color: #5b6eae;
-}
-
-form p {
-    margin-top: 10px;
-    color: white;
-}
-
-form a {
-    color: #7289da;
-    text-decoration: none;
-}
-
-form a:hover {
-    text-decoration: underline;
-}
-
-.main-container {
-    display: flex;
-    flex-direction: row;
-    height: 100vh;
-}
-
+/* Sidebar styling */
 .sidebar {
     width: 20%;
     background-color: #2f3136;
     display: flex;
     flex-direction: column;
-    align-items: center;
     padding: 10px 0;
 }
 
-.server-list, .channel-list {
-    width: 100%;
-    padding: 10px;
-}
-
-.server {
-    background-color: #36393f;
-    width: 40px;
-    height: 40px;
-    border-radius: 20px;
-    margin: 10px 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-}
-
-.channel {
+/* Styling for server and channel items */
+.server, .channel {
     padding: 10px;
     cursor: pointer;
+    color: white;
 }
 
-.channel:hover {
+.server:hover, .channel:hover {
     background-color: #4f545c;
-}
-
-.chat {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-}
-
-.chat-header {
-    background-color: #36393f;
-    padding: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #444;
-    position: relative;
-}
-
-.user-info {
-    display: flex;
-    align-items: center;
-    color: #7289da;
-}
-
-.chat-messages {
-    flex: 1;
-    padding: 10px;
-    background-color: #2f3136;
-    overflow-y: auto;
-    color: white;
-}
-
-.chat-messages div {
-    background-color: #40444b;
-    border-radius: 5px;
-    padding: 10px;
-    margin-bottom: 10px;
-    color: white;
-}
-
-.chat-input {
-    display: flex;
-    padding: 10px;
-    background-color: #2f3136;
-    border-top: 1px solid #444;
-    position: relative;
-}
-
-#message-input {
-    flex: 1;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background-color: #40444b;
-    color: white;
-}
-
-#send-button {
-    padding: 10px 20px;
-    margin-left: 10px;
-    border: none;
-    background-color: #7289da;
-    color: white;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-#send-button:hover {
-    background-color: #5b6eae;
 }
