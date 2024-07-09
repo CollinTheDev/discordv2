@@ -9,25 +9,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const channelList = document.getElementById('channel-list');
     const channelName = document.getElementById('channel-name');
     const chatMessages = document.getElementById('chat-messages');
-    
-    // Dynamically create server buttons
-    for (const [serverName, channels] of Object.entries(servers)) {
-        const serverButton = document.createElement('div');
-        serverButton.className = 'server';
-        serverButton.textContent = serverName;
-        serverButton.onclick = () => showChannels(serverName, channels);
-        serverList.appendChild(serverButton);
+
+    function displayServers() {
+        for (const [serverName, channels] of Object.entries(servers)) {
+            const serverButton = document.createElement('div');
+            serverButton.className = 'server';
+            serverButton.textContent = serverName;
+            serverButton.onclick = () => showChannels(serverName, channels);
+            serverList.appendChild(serverButton);
+        }
     }
 
     function showChannels(serverName, channels) {
-        // Clear previous channels
-        channelList.innerHTML = '';
-        channelName.textContent = `Select a Channel`;
+        channelList.innerHTML = ''; // Clear previous channels
+        channelName.textContent = `Channels for ${serverName}`;
+        channelList.style.display = 'block'; // Show the channel list
 
-        // Show the channel list for the selected server
-        channelList.style.display = 'block';
-
-        // Dynamically create channel buttons
         channels.forEach(channel => {
             const channelButton = document.createElement('div');
             channelButton.className = 'channel';
@@ -38,25 +35,25 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function loadMessages(channel) {
-        // Clear previous messages
-        chatMessages.innerHTML = '';
+        chatMessages.innerHTML = ''; // Clear previous messages
         channelName.textContent = channel;
 
-        // For demo purposes, we use static messages
         const messages = [
             "Hello there!",
             "Welcome to the channel.",
             "Feel free to chat!"
         ];
 
-        // Display messages
         messages.forEach(message => {
             const messageDiv = document.createElement('div');
             messageDiv.textContent = message;
             chatMessages.appendChild(messageDiv);
         });
     }
-    
+
+    // Initialize server list on page load
+    displayServers();
+
     // Dummy user info for demonstration
     document.getElementById('user-info').textContent = "User: ExampleUser";
 });
