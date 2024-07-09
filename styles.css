@@ -147,6 +147,7 @@ form a:hover {
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid #444;
+    position: relative;
 }
 
 .user-info {
@@ -176,6 +177,7 @@ form a:hover {
     padding: 10px;
     background-color: #2f3136;
     border-top: 1px solid #444;
+    position: relative;
 }
 
 #message-input {
