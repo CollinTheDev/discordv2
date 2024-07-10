@@ -81,9 +81,10 @@ function changeServer(serverName) {
     console.log(`Switched to server: ${serverName}`);
 }
 
-// Function to change channel (currently a placeholder)
+// Function to change channel and update the channel name
 function changeChannel(channelName) {
     console.log(`Switched to channel: ${channelName}`);
+    document.getElementById('channel-name').textContent = channelName;
 }
 
 // On page load, show the account settings by default
