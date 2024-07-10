@@ -3,35 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat</title>
+    <title>Chat App</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="main-container">
         <div class="sidebar">
-            <div class="server-list" id="server-list">
+            <div class="server-list">
                 <h2>Servers</h2>
                 <ul>
-                    <li onclick="selectServer('Server1')">Server 1</li>
-                    <li onclick="selectServer('Server2')">Server 2</li>
+                    <li onclick="changeServer('Server 1')">Server 1</li>
+                    <li onclick="changeServer('Server 2')">Server 2</li>
                 </ul>
             </div>
-            <div class="channel-list" id="channel-list">
+            <div class="channel-list">
                 <h2>Channels</h2>
-                <ul id="channels">
-                    <!-- Channels will be populated here -->
+                <ul>
+                    <li onclick="changeChannel('General')">General</li>
+                    <li onclick="changeChannel('Random')">Random</li>
                 </ul>
             </div>
         </div>
         <div class="chat">
             <div class="chat-header">
-                <h1 id="channel-name">Select a Channel</h1>
-                <div class="user-info" id="user-info">User: <span id="username">ExampleUser</span></div>
+                <div class="user-info">
+                    <span id="username-display"></span>
+                    <a href="settings.html">Settings</a>
+                </div>
             </div>
             <div class="chat-messages" id="chat-messages"></div>
             <div class="chat-input">
                 <input type="text" id="message-input" placeholder="Type a message...">
-                <button id="send-button" onclick="sendMessage()">Send</button>
+                <button onclick="sendMessage()">Send</button>
             </div>
         </div>
     </div>
