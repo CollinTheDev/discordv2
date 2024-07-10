@@ -1,76 +1,3 @@
-/* General Styles */
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #2c2f33;
-    color: #fff;
-}
-
-/* Authentication Container */
-.auth-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    text-align: center;
-}
-
-.auth-container h1,
-.auth-container button {
-    margin: 10px;
-}
-
-.auth-container input {
-    margin: 10px;
-    padding: 10px;
-    width: 200px;
-}
-
-.auth-container a {
-    color: #7289da;
-}
-
-/* Main Container */
-.main-container {
-    display: flex;
-    height: 100vh;
-}
-
-/* Sidebar */
-.sidebar {
-    width: 200px;
-    background-color: #23272a;
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-}
-
-.server-list,
-.channel-list {
-    margin-bottom: 20px;
-}
-
-.server-list ul,
-.channel-list ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.server-list li,
-.channel-list li {
-    cursor: pointer;
-    padding: 10px;
-    border-radius: 5px;
-    margin: 5px 0;
-}
-
-.server-list li:hover,
-.channel-list li:hover {
-    background-color: #3c3f43;
-}
-
 /* Chat */
 .chat {
     flex: 1;
@@ -79,134 +6,51 @@ body {
     background-color: #2c2f33;
 }
 
-.chat-header {
-    padding: 10px;
-    background-color: #2c2f33;
-    border-bottom: 1px solid #99aab5;
+/* Profile Popup */
+.profile-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: center;
+    z-index: 1000;
 }
 
-.chat-header .channel-name {
-    font-size: 18px;
-    font-weight: bold;
-}
-
-.chat-messages {
-    flex: 1;
-    padding: 10px;
-    background-color: #23272a;
-    overflow-y: auto;
-}
-
-.chat-input {
-    display: flex;
-    padding: 10px;
-    background-color: #2c2f33;
-    border-top: 1px solid #99aab5;
-}
-
-.chat-input input {
-    flex: 1;
-    padding: 10px;
-    margin-right: 10px;
-    border: none;
-    border-radius: 5px;
-}
-
-.chat-input button {
-    padding: 10px;
-    cursor: pointer;
-    background-color: #7289da;
-    border: none;
-    color: #fff;
-    border-radius: 5px;
-}
-
-.chat-input button:hover {
-    background-color: #99aab5;
-}
-
-.user-info {
-    font-size: 14px;
-}
-
-/* Settings Container */
-.settings-container {
-    display: flex;
-    height: 100vh;
-}
-
-.settings-sidebar {
-    width: 200px;
-    background-color: #23272a;
+.profile-popup-content {
+    background-color: #36393f;
     padding: 20px;
-    display: flex;
-    flex-direction: column;
-}
-
-.settings-sidebar h2 {
-    margin-bottom: 20px;
-}
-
-.settings-sidebar ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.settings-sidebar li {
-    cursor: pointer;
-    padding: 10px;
-    border-radius: 5px;
-    margin: 5px 0;
-}
-
-.settings-sidebar li:hover {
-    background-color: #3c3f43;
-}
-
-.settings-content {
-    flex: 1;
-    padding: 20px;
-    background-color: #2c2f33;
-}
-
-.settings-section {
-    display: none;
-}
-
-.settings-section.active {
-    display: block;
-}
-
-.settings-section h2 {
-    margin-bottom: 20px;
-}
-
-.settings-section input,
-.settings-section textarea {
-    display: block;
-    margin: 10px 0;
-    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    max-width: 400px;
     width: 100%;
 }
 
-.settings-section textarea {
-    height: 100px;
+.profile-popup-content img {
+    border-radius: 50%;
+    max-width: 100px;
+    max-height: 100px;
+    margin-bottom: 10px;
 }
 
-.settings-section button {
-    padding: 10px;
-    cursor: pointer;
-    background-color: #7289da;
-    border: none;
-    color: #fff;
-    border-radius: 5px;
+.profile-popup-content #popup-username {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.profile-popup-content #popup-bio {
     font-size: 16px;
-    margin-top: 10px;
+    color: #99aab5;
 }
 
-.settings-section button:hover {
-    background-color: #99aab5;
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 24px;
+    color: #fff;
 }
