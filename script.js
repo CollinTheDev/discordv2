@@ -56,6 +56,28 @@ function updateAccountSettings() {
     }
 }
 
+// Function to update profile settings
+function updateProfileSettings() {
+    const profilePicture = document.getElementById('profile-picture').files[0];
+    const bio = document.getElementById('bio').value.trim();
+
+    if (profilePicture) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            localStorage.setItem('profilePicture', e.target.result);
+            document.getElementById('profile-picture-preview').src = e.target.result;
+        };
+        reader.readAsDataURL(profilePicture);
+    }
+
+    if (bio) {
+        localStorage.setItem('bio', bio);
+        document.getElementById('bio-preview').textContent = bio;
+    }
+
+    alert('Profile updated successfully.');
+}
+
 // Function to send a message
 function sendMessage() {
     const input = document.getElementById('message-input');
@@ -105,5 +127,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const username = localStorage.getItem('username');
     if (usernameDisplay && username) {
         usernameDisplay.textContent = `Logged in as: ${username}`;
+    }
+
+    // Load profile settings
+    const profilePicturePreview = document.getElementById('profile-picture-preview');
+    const bioPreview = document.getElementById('bio-preview');
+
+    const storedProfilePicture = localStorage.getItem('profilePicture');
+    const storedBio = localStorage.getItem('bio');
+
+    if (storedProfilePicture) {
+        profilePicturePreview.src = storedProfilePicture;
+    }
+
+    if (storedBio) {
+        bioPreview.textContent = storedBio;
     }
 });
