@@ -1,34 +1,63 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #2c2f33;
-    color: #fff;
+/* Add this to styles.css */
+.settings-container {
     display: flex;
-    align-items: center;
-    justify-content: center;
     height: 100vh;
 }
 
-.auth-container {
+.settings-sidebar {
+    width: 200px;
+    background-color: #23272a;
+    padding: 20px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 300px; /* Adjusted width for better appearance */
 }
 
-.auth-container h1 {
+.settings-sidebar h2 {
     margin-bottom: 20px;
 }
 
-.auth-container input {
-    margin: 10px 0;
-    padding: 10px;
-    width: 100%; /* Full width of the container */
+.settings-sidebar ul {
+    list-style-type: none;
+    padding: 0;
 }
 
-button {
+.settings-sidebar li {
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 5px 0;
+}
+
+.settings-sidebar li:hover {
+    background-color: #3c3f43;
+}
+
+.settings-content {
+    flex: 1;
+    padding: 20px;
+    background-color: #2c2f33;
+}
+
+.settings-section {
+    display: none;
+}
+
+.settings-section.active {
+    display: block;
+}
+
+.settings-section h2 {
+    margin-bottom: 20px;
+}
+
+.settings-section input {
+    display: block;
+    margin: 10px 0;
+    padding: 10px;
+    width: 100%;
+}
+
+.settings-section button {
     padding: 10px;
     cursor: pointer;
     background-color: #7289da;
@@ -36,98 +65,9 @@ button {
     color: #fff;
     border-radius: 5px;
     font-size: 16px;
-    margin: 5px 0;
+    margin-top: 10px;
 }
 
-button:hover {
+.settings-section button:hover {
     background-color: #99aab5;
-}
-
-.main-container {
-    display: flex;
-    height: 100vh;
-    width: 100vw;
-}
-
-.sidebar {
-    width: 200px;
-    background-color: #23272a;
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-}
-
-.server-list, .channel-list {
-    margin-bottom: 20px;
-}
-
-.channel-list ul, .server-list ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.channel-list li, .server-list li {
-    cursor: pointer;
-    padding: 10px;
-    border-radius: 5px;
-    margin: 5px 0;
-}
-
-.channel-list li:hover, .server-list li:hover {
-    background-color: #3c3f43;
-}
-
-.chat {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    background-color: #2c2f33;
-}
-
-.chat-header {
-    padding: 10px;
-    background-color: #23272a;
-    border-bottom: 1px solid #99aab5;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.chat-messages {
-    flex: 1;
-    padding: 10px;
-    background-color: #23272a;
-    overflow-y: auto;
-}
-
-.chat-input {
-    display: flex;
-    padding: 10px;
-    background-color: #2c2f33;
-    border-top: 1px solid #99aab5;
-}
-
-.chat-input input {
-    flex: 1;
-    padding: 10px;
-    margin-right: 10px;
-    border: none;
-    border-radius: 5px;
-}
-
-.chat-input button {
-    padding: 10px;
-    cursor: pointer;
-    background-color: #7289da;
-    border: none;
-    color: #fff;
-    border-radius: 5px;
-}
-
-.chat-input button:hover {
-    background-color: #99aab5;
-}
-
-.user-info {
-    font-size: 14px;
 }
