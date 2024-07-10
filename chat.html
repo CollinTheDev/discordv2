@@ -3,42 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat App</title>
+    <title>Chat</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="main-container">
         <div class="sidebar">
             <div class="server-list">
-                <h2>Servers</h2>
+                <h3>Servers</h3>
                 <ul>
                     <li onclick="changeServer('Server 1')">Server 1</li>
                     <li onclick="changeServer('Server 2')">Server 2</li>
                 </ul>
             </div>
             <div class="channel-list">
-                <h2>Channels</h2>
+                <h3>Channels</h3>
                 <ul>
-                    <li onclick="changeChannel('General')">General</li>
-                    <li onclick="changeChannel('Random')">Random</li>
+                    <li onclick="changeChannel('Channel 1')">Channel 1</li>
+                    <li onclick="changeChannel('Channel 2')">Channel 2</li>
                 </ul>
             </div>
         </div>
         <div class="chat">
             <div class="chat-header">
-                <div class="user-info">
-                    <span id="username-display"></span>
-                    <a href="settings.html">Settings</a>
-                </div>
-                <div class="channel-name" id="channel-name">General</div>
+                <div id="channel-name">Channel Name</div>
+                <div id="username-display">Logged in as: <span id="user-name">User</span></div>
             </div>
-            <div class="chat-messages" id="chat-messages"></div>
+            <div id="chat-messages" class="chat-messages"></div>
             <div class="chat-input">
-                <input type="text" id="message-input" placeholder="Type a message...">
+                <input id="message-input" type="text" placeholder="Type your message...">
                 <button onclick="sendMessage()">Send</button>
             </div>
         </div>
     </div>
+
+    <!-- Profile Popup -->
+    <div id="profile-popup" class="profile-popup hidden">
+        <div class="profile-popup-content">
+            <span class="close-btn" onclick="closeProfilePopup()">&times;</span>
+            <img id="popup-profile-picture" src="" alt="Profile Picture">
+            <div id="popup-username">Username</div>
+            <div id="popup-bio">Bio</div>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
