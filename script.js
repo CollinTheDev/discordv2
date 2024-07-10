@@ -1,15 +1,12 @@
 // Function to show the profile popup
-function showProfilePopup() {
+function showProfilePopup(username) {
     const profilePopup = document.getElementById('profile-popup');
     const profilePicture = localStorage.getItem('profilePicture');
-    const username = localStorage.getItem('username');
     const bio = localStorage.getItem('bio');
 
+    document.getElementById('popup-username').textContent = username;
     if (profilePicture) {
         document.getElementById('popup-profile-picture').src = profilePicture;
-    }
-    if (username) {
-        document.getElementById('popup-username').textContent = username;
     }
     if (bio) {
         document.getElementById('popup-bio').textContent = bio;
@@ -32,7 +29,8 @@ function sendMessage() {
     if (message) {
         const chatMessages = document.getElementById('chat-messages');
         const newMessage = document.createElement('div');
-        newMessage.innerHTML = `<span class="username" onclick="showProfilePopup()">${username}</span>: ${message}`;
+        newMessage.classList.add('message');
+        newMessage.innerHTML = `<span class="username" onclick="showProfilePopup('${username}')">${username}</span>: ${message}`;
         chatMessages.appendChild(newMessage);
         input.value = '';
 
@@ -61,6 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const storedMessages = JSON.parse(localStorage.getItem('messages')) || [];
     storedMessages.forEach(message => {
         const newMessage = document.createElement('div');
+        newMessage.classList.add('message');
         newMessage.innerHTML = message;
         chatMessages.appendChild(newMessage);
     });
