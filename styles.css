@@ -184,11 +184,16 @@ body {
     margin-bottom: 20px;
 }
 
-.settings-section input {
+.settings-section input,
+.settings-section textarea {
     display: block;
     margin: 10px 0;
     padding: 10px;
     width: 100%;
+}
+
+.settings-section textarea {
+    height: 100px;
 }
 
 .settings-section button {
