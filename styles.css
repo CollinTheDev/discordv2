@@ -85,6 +85,12 @@ body {
     border-bottom: 1px solid #99aab5;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+}
+
+.chat-header .channel-name {
+    font-size: 18px;
+    font-weight: bold;
 }
 
 .chat-messages {
